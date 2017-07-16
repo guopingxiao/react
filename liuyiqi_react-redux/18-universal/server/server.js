@@ -19,12 +19,18 @@ const port = 3000;
 
 
 const compiler = webpack(webpackConfig);
+
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
   publicPath: webpackConfig.output.publicPath
 }));
 app.use(webpackHotMiddleware(compiler));
 
+/**
+ * 页面渲染函数
+ * @param {*} html 
+ * @param {*} initialState 
+ */
 function renderFullPage(html, initialState) {
   return `
     <!doctype html>
@@ -43,10 +49,10 @@ function renderFullPage(html, initialState) {
     `;
 }
 
-function handleRender(req, res) {
+function handleRender(req, res) {// 中间件handleRender
   fetchCounter(apiResult => {
-    const params = qs.parse(req.query);
-    const counter = parseInt(params.counter, 10) || apiResult || 0;
+    const params = qs.parse(req.query);//qs 将请求参数转换为字符串
+    const counter = parseInt(params.counter, 10) || apiResult || 0; //先判断是否有查询数据
 
     const initialState = { counter };
 
@@ -60,7 +66,7 @@ function handleRender(req, res) {
 
     const finalState = store.getState();
 
-    res.send(renderFullPage(html, finalState));
+    res.send(renderFullPage(html, finalState));// 将字符串嵌入页面发送给浏览器
   });
 }
 
