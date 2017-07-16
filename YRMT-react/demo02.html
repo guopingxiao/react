@@ -1,0 +1,41 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="./build/react.js"></script>
+    <script src="./build/react-dom.js"></script>
+    <script src="./build/browser.min.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+    var Jack = React.createClass({
+        render: function() {
+            return <p>I'm Jack</p>
+        }
+    });
+    var Pual = React.createClass({
+        render: function() {
+            return <p>I'm Pual</p>
+        }
+    });
+
+    var Info = React.createClass({
+        render: function() {
+            return (
+                    <div className="user">
+                        {
+                            this.props.name == 'Jack' ?
+                                    <Jack /> : <Pual />
+                        }
+                    </div>
+            )
+        }
+    });
+
+    ReactDOM.render(
+            <Info name="Pual" />,
+            document.getElementById('box')
+    );
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="./build/react.js"></script>
+    <script src="./build/react-dom.js"></script>
+    <script src="./build/browser.min.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+    var Info = React.createClass({
+        render() {
+            // return <input type="text" name="" onclick="WdatePicker()" />
+            // return <input type="text" name="" onClick="WdatePicker()" />
+            /*var clickEvent = {
+                onClick: function(e) {
+                    console.log(e);
+//                    WdatePicker(e);
+                }
+            };*/
+            return <input type="text" name="date" ref="date"  />
+        },
+        componentDidMount() {
+            let date = ReactDOM.findDOMNode(this.refs.date);
+            date.onclick = function(e) {
+                console.log(e);
+            }
+        }
+    });
+
+    ReactDOM.render(
+            <Info name="Jack" />,
+            document.getElementById('box')
+    );
+</script>
+</body>
+</html>

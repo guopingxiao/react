@@ -1,0 +1,34 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="./build/react.js"></script>
+    <script src="./build/react-dom.js"></script>
+    <script src="./build/browser.min.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+    var Info = React.createClass({
+        render: function() {
+            var myAttr = {
+                'title': 'myTitle',
+                'age': 10,
+                'data-age': 10,
+                'onClick': function() {
+                    console.log('onClick');
+                },
+                'onclick': function() {
+                    console.log('onclick');
+                }
+            }
+            return <p className="user" me="me" {...myAttr}>{this.props.name}</p>
+        }
+    });
+
+    ReactDOM.render(
+            <Info name="Jack" />,
+            document.getElementById('box')
+    );
+</script>
+</body>
+</html>

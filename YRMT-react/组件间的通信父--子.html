@@ -1,0 +1,56 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="./build/react.js"></script>
+    <script src="./build/react-dom.js"></script>
+    <script src="./build/browser.min.js"></script>
+</head>
+<body>
+<div id="box"></div>
+<script type="text/babel">
+    class InputItem extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {};
+        }
+
+        inputChange(e) {
+            this.props.inputChange(e.target.value);
+        }
+
+        render() {
+            return <p title={this.props.title}>
+                [InputItem]-input: <input type="text" onChange={this.inputChange.bind(this)} />
+            </p>
+        }
+    }
+
+    class Page extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                inputValue: ''
+            };
+        }
+
+        inputChange(inputValue) {
+            this.setState({
+                inputValue,
+            });
+        }
+
+        render() {
+            return (
+                    <div>
+                        <p>[Page]-input: <input type="input" value={this.state.inputValue} /></p>
+                        <InputItem title="myInput" inputChange={this.inputChange.bind(this)} />
+                        <InputItem title="myInput" inputChange={this.inputChange.bind(this)} />
+                    </div>
+            )
+        }
+    }
+
+    ReactDOM.render(<Page />, document.getElementById('box'));
+</script>
+</body>
+</html>
